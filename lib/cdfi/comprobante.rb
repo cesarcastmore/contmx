@@ -1,4 +1,8 @@
-class Comprobante < WriterXML
+ require 'openssl'
+ require 'base64'
+
+
+ class Comprobante < WriterXML
   def initialize(hash)
     @targetNamespace = {:prefix => "cfdi", :namespace=>"http://www.sat.gob.mx/cfd/3"  }
     @schemaLocation = "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd .mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd"
@@ -13,6 +17,54 @@ class Comprobante < WriterXML
     @sequence = ["Emisor", "Receptor", "Conceptos","Impuestos", "Complemento", "Adenda"]
     from_hash(hash)
   end
+
+  def sellar(cert_file, key_file, password)
+    nocertificado=""
+    certificado=""
+    raw = File.read cert_file
+    certificate = OpenSSL::X509::Certificate.new raw
+    certificate.serial.to_s(16).scan(/.{2}/).each {|v| nocertificado += v[1] }
+    certificado = certificate.to_s.gsub(/^-.+/, '').gsub(/\n/, '')
+
+    digest = OpenSSL::Digest::SHA1.new
+    pem_file = export_to_pem(key_file, password )
+
+    pkey = OpenSSL::PKey::RSA.new( File.read(pem_file), password)
+    signature = pkey.sign(OpenSSL::Digest::SHA1.new, certificado)
+    puts pkey.verify(digest, signature,  certificado)
+    sello =Base64.encode64(signature)
+
+    set(:certificado, certificado)
+    set(:nocertificado, nocertificado)
+    set(:sello, sello)
+
+
+  end
+
+  def export_to_pem(key, password)
+    pem_file = key.gsub('.key', '.pem')
+
+    if File.exist?(pem_file)
+      puts "el archivo existe"
+      return pem_file
+    else
+      command = "openssl pkcs8 -inform DER -in someKey.key -passin pass:somePassword -out key.pem"
+
+      pem_file = key.gsub('.key', '.pem')
+
+      command.gsub! 'someKey.key', key
+      command.gsub! 'somePassword', password
+      command.gsub! 'key.pem', pem_file
+
+      result = system(  command )
+      return pem_file
+    end
+
+
+  end
+
+
+
 
 
 end
