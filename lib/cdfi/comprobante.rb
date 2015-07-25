@@ -18,6 +18,8 @@
     from_hash(hash)
   end
 
+#Metodo que sella la factura electonicos con el certificado, la llave privada y el password
+
   def sellar(cert_file, key_file, password)
     nocertificado=""
     certificado=""
@@ -32,7 +34,7 @@
     pkey = OpenSSL::PKey::RSA.new( File.read(pem_file), password)
     signature = pkey.sign(OpenSSL::Digest::SHA1.new, certificado)
     puts pkey.verify(digest, signature,  certificado)
-    sello =Base64.encode64(signature)
+    sello =Base64.encode64(signature).gsub(/\n/, '')
 
     set(:certificado, certificado)
     set(:nocertificado, nocertificado)
@@ -41,6 +43,7 @@
 
   end
 
+#Metodo que hace el archivo key a pem, se esta utilizando la consola del sistema.
   def export_to_pem(key, password)
     pem_file = key.gsub('.key', '.pem')
 

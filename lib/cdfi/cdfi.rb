@@ -1,3 +1,5 @@
+require "nokogiri"
+
 module CDFI
 
   def CDFI.to_xml(comprobante)
