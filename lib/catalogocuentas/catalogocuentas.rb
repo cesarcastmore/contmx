@@ -27,7 +27,7 @@ module CatalogoCuentas
 
 
     def CatalogoCuentas.validateScheme?(path)
-      array_errors = CDFI.validateScheme(path)
+      array_errors = CatalogoCuentas.validateScheme(path)
       return array_errors.empty?
     end
 

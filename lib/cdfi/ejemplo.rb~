@@ -1,6 +1,6 @@
 require "nokogiri"
 
-require "../writerxml.rb"
+require "./writerxml.rb"
 
 require "./cdfi.rb"
 require "./comprobante.rb"

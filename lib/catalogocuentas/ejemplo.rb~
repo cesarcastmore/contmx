@@ -1,4 +1,4 @@
-require "../writerxml.rb"
+require "./writerxml.rb"
 require "./ctas.rb"
 require "./catalogo.rb"
 require "./catalogocuentas.rb"

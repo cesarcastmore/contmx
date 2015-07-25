@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'contmx'
-  s.version     = '0.0.2'
-  s.date        = '2015-07-24'
+  s.version     = '0.0.3'
+  s.date        = '2015-07-25'
   s.summary     = "XML de Contabilidad de Mexico"
   s.description = "XML de contabilidad de Mexico"
   s.authors     = ["Cesar Castillo Moreno"]

@@ -12,9 +12,10 @@ variables
 =end
   def from_hash(para)
 
+    @attributes = Array.new if @attributes.nil?
+    @sequence = Array.new if @sequence.nil?
+
     if !para.nil?
-      @attributes = [] if @attributes.nil?
-      @sequence = [] if @sequence.nil?
 
       hash_objects = from_hash_to_array_objects(para)
       set_atr_object_from_hash(para,hash_objects)
@@ -161,6 +162,9 @@ seran utilizado para el metodo writeXML
 =end
 
   def sequence_to_array_objects
+    @attributes = Array.new if @attributes.nil?
+    @sequence = Array.new if @sequence.nil?
+
     array = []
     if !@sequence.empty?
       @sequence.each { |element|
