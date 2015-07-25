@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<catalogocuentas:Catalogo xmlns:catalogocuentas="www.sat.gob.mx/esquemas/ContabilidadE/1_1/CatalogoCuentas" Version="1.1" RFC="RUB010215RAI" Mes="01" Anio="2015" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="www.sat.gob.mx/esquemas/ContabilidadE/1_1/CatalogoCuentas http://www.sat.gob.mx/esquemas/ContabilidadE/1_1/CatalogoCuentas/CatalogoCuentas_1_1.xsd">
+  <catalogocuentas:Ctas CodAgrup="604.49" NumCta="100001" Desc="cuenta 1 " SubCtaDe="1.01" Nivel="1" Natur="D"/>
+  <catalogocuentas:Ctas CodAgrup="604.49" NumCta="100001" Desc="cuenta 1 " SubCtaDe="1.01" Nivel="1" Natur="D"/>
+</catalogocuentas:Catalogo>
