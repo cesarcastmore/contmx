@@ -14,7 +14,9 @@ variables
 
     @attributes = Array.new if @attributes.nil?
     @sequence = Array.new if @sequence.nil?
+
     set_objects_to_acessor
+    set_attributes_to_reader
 
     if !para.nil?
       hash_objects = from_hash_to_array_objects(para)
@@ -34,6 +36,21 @@ def set_objects_to_acessor
   end
 
 end
+
+
+=begin
+Metodo para colocar los atributos como attr_reader
+=end
+
+def set_attributes_to_reader
+  if !@attributes.empty?
+    @attributes.each { |ele|
+      self.class.__send__(:attr_reader, ele.downcase)
+    }
+  end
+
+end
+
 
 =begin
 Metodo que leera cada uno de los atributos y hara un hash de toda la clase
@@ -98,11 +115,13 @@ end
 Metodo para escribir atributos en el objecto
 =end
 def []= (key, value)
-  @attributes = Array.new if @attributes.nil?
-  if @attributes.include? key.downcase
-    return set(key, value)
+  key.downcase!
+  attributes_downcase =@attributes.map(&:downcase)
+  if attributes_downcase.include? key
+    puts key
+    set(key, value)
   else
-    raise 'El atributo no ha sido encontrado en el objecto'
+    raise 'El atributo '+  key + ' no ha sido encontrado'
   end
 end
 

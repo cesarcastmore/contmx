@@ -14,10 +14,24 @@ cuenta_1 = Ctas.new(:codAgrup=>"604.49", :numCta=>"100001",
                      :nivel =>"1" , :natur=>"D")
 cuentas <<cuenta_1
 cuenta_2= Ctas.new(:codAgrup=>"604.49", :numCta=>"100001",
-                   :desc =>"cuenta 1 ", :subCtaDe=>"1.01",
+                   :desc =>"cuenta 2", :subCtaDe=>"1.01",
                     :nivel=>"1", :natur=>"D")
 cuentas << cuenta_2
+
+#otra forma divertida de crear  una cuenta
+cuenta_3 = Ctas.new
+cuenta_3["desc"] = "cuenta 3"
+cuenta_3["subCtaDe"] = "1.01"
+cuenta_3["nivel"] = "2"
+cuenta_3["codAgrup"] = "604.30"
+cuenta_3["natur"] = "D"
+cuenta_3["numCta"] = "100003"
+
+
+cuentas << cuenta_3
+
 catalogo.set(:ctas, cuentas)
+
 
 
 CatalogoCuentas.write_to_file("catalogocuenta.xml", catalogo)
