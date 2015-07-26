@@ -14,15 +14,26 @@ variables
 
     @attributes = Array.new if @attributes.nil?
     @sequence = Array.new if @sequence.nil?
+    set_objects_to_acessor
 
     if !para.nil?
-
       hash_objects = from_hash_to_array_objects(para)
       set_atr_object_from_hash(para,hash_objects)
-
     end
-
   end
+
+=begin
+Metodo para colocar los objecto como attr_acessor
+=end
+
+def set_objects_to_acessor
+  if !@sequence.empty?
+    @sequence.each { |ele|
+      self.class.__send__(:attr_accessor, ele.downcase)
+    }
+  end
+
+end
 
 =begin
 Metodo que leera cada uno de los atributos y hara un hash de toda la clase
@@ -70,8 +81,29 @@ Asignara una instancia basandose en el symbolo que se indica en el parametro
     end
   end
 
+=begin
+Metodo para obtener los atributos del objecto
+=end
+
 def [](key)
-  return get(key)
+  @attributes = Array.new if @attributes.nil?
+  if @attributes.include? key.downcase
+    return get(key)
+  else
+    raise 'El atributo no ha sido encontrado en el objecto'
+  end
+end
+
+=begin
+Metodo para escribir atributos en el objecto
+=end
+def []= (key, value)
+  @attributes = Array.new if @attributes.nil?
+  if @attributes.include? key.downcase
+    return set(key, value)
+  else
+    raise 'El atributo no ha sido encontrado en el objecto'
+  end
 end
 
 =begin

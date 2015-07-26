@@ -33,7 +33,7 @@
 
     pkey = OpenSSL::PKey::RSA.new( File.read(pem_file), password)
     signature = pkey.sign(OpenSSL::Digest::SHA1.new, certificado)
-    puts pkey.verify(digest, signature,  certificado)
+    #puts pkey.verify(digest, signature,  certificado)
     sello =Base64.encode64(signature).gsub(/\n/, '')
 
     set(:certificado, certificado)
@@ -48,7 +48,6 @@
     pem_file = key.gsub('.key', '.pem')
 
     if File.exist?(pem_file)
-      puts "el archivo existe"
       return pem_file
     else
       command = "openssl pkcs8 -inform DER -in someKey.key -passin pass:somePassword -out key.pem"

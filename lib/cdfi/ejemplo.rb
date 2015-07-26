@@ -62,10 +62,17 @@ emisor.set(:expedidoen,  expedidoen)
 comprobante_1.set(:emisor , emisor)
 
 receptor =  Receptor.new(:nombre => "RAILS SA de CV", :rfc =>"RAI010101CRS")
-domicilio = Domicilio.new(:calle=>"calle", :pais=>"Mexico")
-receptor.set(:domicilio , domicilio)
+domicilio = Domicilio.new(:calle=>" cumbres oro", :pais=>"Mexico")
 
-comprobante_1.set(:receptor, receptor)
+#Metodo para obtener  los atributos
+calle = domicilio["calle"]
+
+#Se pueden sobrescribir en los atributos
+domicilio["calle"]="calle nueva"
+
+#Se puede asignar por medio del punto, pero aqui solo es por nodos y no por atributos
+receptor.domicilio=domicilio
+comprobante_1.receptor=receptor
 
 #El nodo de los conceptos es una lista por lo tanto es necesario crear un arreglo
 # que se usara como lista
@@ -147,6 +154,3 @@ una buena estrategia separlos del hash y añadirlos cuando estubieran timbrados.
 #comprobante_2.complemento =complemento;
 
 xml = CDFI.to_xml(comprobante_2)
-puts  xml
-
-puts "acaba de entra aqui---------------------------"
