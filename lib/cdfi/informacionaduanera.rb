@@ -1,4 +1,3 @@
-require "./writerxml.rb"
 
   class InformacionAduanera < WriterXML
 

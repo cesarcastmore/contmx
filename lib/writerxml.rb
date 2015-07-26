@@ -237,12 +237,7 @@ ya que se inicializara y se asignaran
             object = Object.const_get(hash_objects[keyDowncase.to_sym]).new(value)
             set( keyDowncase, object)
           elsif (value.kind_of?(Array))
-            objects= Array.new
-            value.each { |e|
-              object = Object.const_get(hash_objects[keyDowncase.to_sym]).new(value)
-              @objects << object
-            }
-            set( keyDowncase, objects)
+            kind_of_value_inside_array(value, keyDowncase, hash_objects)
           end
         end
       }
@@ -260,6 +255,29 @@ ya que se inicializara y se asignaran
         @objects = array_objects
       end
     end
+  end
+=begin
+#Revisa que el los valores del hash no haya valores que son arreglos sino busca sus
+objectos, si estan en la secuencia los crea a partir de alli, sino esta en la secuencia
+los asigna a un objeto llamado objectos.
+@param [Array]  es el arreglo que se encontro en el from_hash
+@param [Array]  es el Symbol que se encontro en el from_hash y estan en minusculas
+@param [Hash] son las clases disponibles en la sequence
+=end
+  def kind_of_value_inside_array(array, key_downcase, hash_objects)
+
+    sequence_downcase =@sequence.map(&:downcase)
+    objects= Array.new
+
+    if sequence_downcase.include? key_downcase.to_s
+      array.each { |e|
+        object = Object.const_get(hash_objects[key_downcase.to_sym]).new(e)
+        objects << object
+      }
+      set( key_downcase, objects)
+    end
+
+
   end
 
 end

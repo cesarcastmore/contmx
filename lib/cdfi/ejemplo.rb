@@ -119,17 +119,21 @@ puts xml
 CDFI.write_to_file("comprobante.xml", comprobante_1);
 CDFI.validateScheme("comprobante.xml")
 
-#comprobante_2 = CDFI::Comprobante.new(:metodoDePago =>"ingreso",
-#          :Emisor => {:nombre => "ruby sa de cv",
-#                      :rfc =>"RUB010101CRS",
-#                      :ExpedidoEn => { :calle => "calle"}},
-#          :Receptor => { :nombre =>"rail sa de cv",
-#                        :rfc => "RAI010201ASB",
-#                        :Domicilio => { :calle => "calle"}
-#                        },
-#          :Conceptos => [
-#                        {:Concepto => { :valorUnitario => "12.12"}},
-#                        {:Concepto => {:valorUnitario => "13.12"}}]);
+
+
+
+#Ejemplo dos usando totolmento Hash
+comprobante_2 = Comprobante.new(:metodoDePago =>"ingreso",
+          :Emisor => {:nombre => "ruby sa de cv",
+                      :rfc =>"RUB010101CRS",
+                      :ExpedidoEn => { :calle => "calle"}},
+          :Receptor => { :nombre =>"rail sa de cv",
+                        :rfc => "RAI010201ASB",
+                        :Domicilio => { :calle => "calle"}
+                        },
+          :Conceptos => [
+                        {:Concepto => { :valorUnitario => "12.12"}},
+                        {:Concepto => {:valorUnitario => "13.12"}}])
 =begin
 Si deseamos agregar el complemento es necesario separar
 del hash para crear el objeto Complemento que necesitamos y luego agregarlo al objeto comprobante.
@@ -142,5 +146,7 @@ una buena estrategia separlos del hash y añadirlos cuando estubieran timbrados.
 #complemento.add(timbreFiscal);
 #comprobante_2.complemento =complemento;
 
-#xml = CDFI.to_xml(comprobante_2);
-#puts  xml;
+xml = CDFI.to_xml(comprobante_2)
+puts  xml
+
+puts "acaba de entra aqui---------------------------"
