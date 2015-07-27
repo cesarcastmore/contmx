@@ -1,6 +1,6 @@
 class CompNalOtr < WriterXML
-  def initialize(para)
+  def initialize(para=nil)
     @attributes=["CFD_CBB_Serie", "CFD_CBB_NumFol", "RFC", "MontoTotal", "Moneda", "TipCamb", ]
-    from_hash(para)
+    init(para)
   end
 end

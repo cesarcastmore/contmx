@@ -5,7 +5,7 @@ class Catalogo <WriterXML
     @schemaLocation="www.sat.gob.mx/esquemas/ContabilidadE/1_1/CatalogoCuentas http://www.sat.gob.mx/esquemas/ContabilidadE/1_1/CatalogoCuentas/CatalogoCuentas_1_1.xsd"
     @targetNamespace = {:prefix => "catalogocuentas", :namespace=>"www.sat.gob.mx/esquemas/ContabilidadE/1_1/CatalogoCuentas" }
 
-    from_hash(para)
+    init(para)
   end
 
 end

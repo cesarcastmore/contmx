@@ -1,8 +1,8 @@
 class Transferencia < WriterXML
-  def initialize(para)
+  def initialize(para=nil)
     @attributes=["CtaOri", "BancoOriNal", "BancoOriExt", "CtaDesNal", "BancoOriExt",
                   "Fecha", "Benef", "RFC", "Monto", "TipCamb"]
-                  
-    from_hash(para)
+
+    init(para)
   end
 end

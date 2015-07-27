@@ -3,7 +3,7 @@
 
 
  class Comprobante < WriterXML
-  def initialize(hash)
+  def initialize(para=nil)
     @targetNamespace = {:prefix => "cfdi", :namespace=>"http://www.sat.gob.mx/cfd/3"  }
     @schemaLocation = "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd .mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd"
     @attributes = [ "serie", "folio", "fecha", "sello",
@@ -15,7 +15,7 @@
                   "total", "serieFolioFiscalOrig",
                   "fechaFolioFiscalOrig", "montoFolioFiscalOrig", "version"]
     @sequence = ["Emisor", "Receptor", "Conceptos","Impuestos", "Complemento", "Adenda"]
-    from_hash(hash)
+    init(para)
   end
 
 #Metodo que sella la factura electonicos con el certificado, la llave privada y el password

@@ -1,6 +1,6 @@
 class CompExt < WriterXML
-  def initialze(para)
+  def initialze(para=nil)
     @attributes= ["NumFactExt", "TaxID", "MontoTotal", "Moneda", "TipCamb"]
-    from_hash(para)
+    init(para)
   end
 end

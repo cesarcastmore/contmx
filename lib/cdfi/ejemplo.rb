@@ -72,7 +72,7 @@ domicilio["calle"]="calle nueva"
 
 #Se puede asignar por medio del punto, pero aqui solo es por nodos y no por atributos
 receptor.domicilio=domicilio
-comprobante_1.receptor=receptor
+comprobante_1.receptor = receptor
 
 #El nodo de los conceptos es una lista por lo tanto es necesario crear un arreglo
 # que se usara como lista

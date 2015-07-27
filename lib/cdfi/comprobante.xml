@@ -13,11 +13,7 @@
     <cfdi:Concepto cantidad="1" unidad="unidad" descripcion="Concepto 1" valorUnitario="1" importe="100"/>
   </cfdi:Conceptos>
   <cfdi:Impuestos>
-    <cfdi:Traslados>
-      <cfdi:Traslado impuesto="IVA" importe="32" tasa="16"/>
-    </cfdi:Traslados>
+    <cfdi:Traslados/>
   </cfdi:Impuestos>
-  <cfdi:Complemento>
-    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" selloSAT="12wef43drg4terdf3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/TimbreFiscalDigital/TimbreFiscalDigital.xsd"/>
-  </cfdi:Complemento>
+  <cfdi:Complemento/>
 </cfdi:Comprobante>

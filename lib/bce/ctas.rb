@@ -1,7 +1,7 @@
 class Ctas< WriterXML
-  def initialize(para)
+  def initialize(para=nil)
     @attributes=["NumCta", "SaldoIni", "Debe", "Haber", "SaldoFin", "Importe"]
-    from_hash(para)
+    init(para)
 
   end
 

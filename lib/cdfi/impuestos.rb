@@ -1,8 +1,8 @@
 class Impuestos < WriterXML
-  def initialize(param=nil)
+  def initialize(para=nil)
     @attributes = ["totalImpuestosRetenidos", "totalImpuestosTrasladados"]
     @sequence = ["Retenciones", "Traslados"]
-    from_hash(param)
+    init(para)
 
   end
 end

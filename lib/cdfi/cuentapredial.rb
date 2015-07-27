@@ -1,7 +1,7 @@
 class CuentaPredial < WriterXML
-  def initializa(para)
+  def initializa(para=nil)
     @attributes= ["numero"]
-    from_hash(para)
+    init(para)
   end
 
 end

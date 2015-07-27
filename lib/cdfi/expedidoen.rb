@@ -1,7 +1,7 @@
 class ExpedidoEn < WriterXML
-  def initialize(hash)
+  def initialize(para=nil)
     @attributes=["calle", "noExterior", "noInterior", "colonia", "localidad", "referencia",
                 "municipio", "estado", "pais", "codigoPostal"]
-    from_hash(hash)
+    init(para)
   end
 end

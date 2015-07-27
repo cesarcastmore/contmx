@@ -1,5 +1,5 @@
 class Complemento < WriterXML
-  def initialize(hash)
-    from_hash(hash)
+  def initialize(para=nil)
+    init(para)
   end
 end

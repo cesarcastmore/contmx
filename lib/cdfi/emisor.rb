@@ -1,7 +1,7 @@
 class Emisor < WriterXML
-  def initialize(hash)
+  def initialize(para=nil)
     @attributes = ["nombre", "rfc"]
     @sequence = ["DomicilioFiscal", "ExpedidoEn", "RegimenFiscal"]
-    from_hash(hash)
+    init(para)
   end
 end

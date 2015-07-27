@@ -1,9 +1,9 @@
 
   class Conceptos < WriterXML
 
-    def initialize(hash=nil)
+    def initialize(para=nil)
       @sequence=["Concepto"]
-      from_hash(hash=nil)
+      init(para)
     end
 
   end

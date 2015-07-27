@@ -1,7 +1,7 @@
 class Retencion < WriterXML
-  def initialize(param)
+  def initialize(para=nil)
     @attributes =["importe", "impuesto"]
 
-    from_hash(param)
+    init(para)
   end
 end

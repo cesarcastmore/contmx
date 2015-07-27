@@ -1,11 +1,11 @@
 
 class Concepto < WriterXML
 
-  def initialize(hash)
+  def initialize(para=nil)
     @attributes=[ "cantidad", "unidad", "noIdentificacion",
         "descripcion", "valorUnitario", "importe"];
     @sequence=["InformacionAduanera", "CuentaPredial", "ComplementoConcepto", "Parte"]
-    from_hash(hash)
+    init(para)
     end
 
   end

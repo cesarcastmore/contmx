@@ -1,6 +1,6 @@
 class Traslados < WriterXML
-  def initialize(para)
+  def initialize(para=nil)
     @sequence = ["Traslado"]
-    from_hash(para)
+    init(para)
   end
 end

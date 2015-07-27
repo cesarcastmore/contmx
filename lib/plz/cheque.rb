@@ -1,7 +1,7 @@
 class Cheque <WriterXML
-  def initialize(para)
+  def initialize(para=nil)
     @attributes=["Num", "BanEmisNal", "BanEmisExt", "CtaOri", "Fecha", "Benef", "RFC", "Monto",
                 "Moneda", "TipCamb"]
-    from_hash(para)
+    init(para)
   end
 end

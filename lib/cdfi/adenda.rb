@@ -1,5 +1,5 @@
 class Adenda < WriterXML
-  def initialize(params)
-    from_hash(params)
+  def initialize(para=nil)
+    init(param)
   end
 end

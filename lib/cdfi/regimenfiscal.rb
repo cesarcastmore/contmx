@@ -1,6 +1,6 @@
 class RegimenFiscal < WriterXML
-  def initialize(para)
+  def initialize(para=nil)
     @attributes = ["Regimen"]
-    from_hash(para)
+    init(para)
   end
 end

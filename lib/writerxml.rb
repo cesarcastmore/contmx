@@ -1,28 +1,44 @@
 class WriterXML
   attr_reader  :attributes, :elements, :schemaLocation, :targetNamespace, :objects;
 
-  def initialize(hash)
-
+  def initialize(para)
   end
 
+
 =begin
-Metodo que lee el hash o el arreglo y asigna cada uno de los valores a sus respetivas
-variables
-@param [Hash] [Array]
+Metodo que inicializa la clase
 =end
-  def from_hash(para)
+def init(para=nil)
 
-    @attributes = Array.new if @attributes.nil?
-    @sequence = Array.new if @sequence.nil?
+  @attributes = Array.new if @attributes.nil?
+  @sequence = Array.new if @sequence.nil?
 
-    set_objects_to_acessor
-    set_attributes_to_reader
+  set_objects_to_acessor
+  set_attributes_to_reader
+  if para.kind_of? Hash
+    from_hash(para)
+  end
+end
 
-    if !para.nil?
+=begin
+Metodo que actualiza los parametros despues de  hacer el new
+=end
+def update(para)
+  if para.kind_of? Hash
+    from_hash(para)
+  end
+
+end
+
+=begin
+  Metodo que lee el hash o el arreglo y asigna cada uno de los valores a sus respetivas
+  variables
+  @param [Hash] [Array]
+=end
+    def from_hash(para)
       hash_objects = from_hash_to_array_objects(para)
       set_atr_object_from_hash(para,hash_objects)
     end
-  end
 
 =begin
 Metodo para colocar los objecto como attr_acessor
@@ -118,7 +134,6 @@ def []= (key, value)
   key.downcase!
   attributes_downcase =@attributes.map(&:downcase)
   if attributes_downcase.include? key
-    puts key
     set(key, value)
   else
     raise 'El atributo '+  key + ' no ha sido encontrado'
@@ -277,7 +292,6 @@ ya que se inicializara y se asignaran
 
     attributes_downcase =@attributes.map(&:downcase)
     elements_downcase =@sequence.map(&:downcase)
-
     if para.kind_of? Hash
       para.each { |key, value|
         keyDowncase = key.downcase
@@ -327,8 +341,7 @@ los asigna a un objeto llamado objectos.
       }
       set( key_downcase, objects)
     end
-
-
   end
+
 
 end

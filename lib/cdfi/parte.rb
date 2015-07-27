@@ -1,6 +1,6 @@
 class Parte < WriterXML
-  def initialize(params)
+  def initialize(para=nil)
     @sequence = ["InformacionAduanera"]
-    from_hash(params)
+    init(para)
   end
 end

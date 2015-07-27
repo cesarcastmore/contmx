@@ -1,6 +1,6 @@
 class Traslado < WriterXML
-  def initialize(para)
+  def initialize(para=nil)
     @attributes = ["impuesto", "importe", "tasa"]
-    from_hash(para)
+    init(para)
   end
 end

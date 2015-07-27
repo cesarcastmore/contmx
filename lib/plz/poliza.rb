@@ -1,8 +1,8 @@
 class Poliza < WriterXML
-  def initialize(para)
+  def initialize(para=nil)
     @attributes=["NumUnIdenPol", "Fecha", "Concepto"]
     @sequence =["Transaccion"]
 
-    from_hash(para)
+    init(para)
   end
 end

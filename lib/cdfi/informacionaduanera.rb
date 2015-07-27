@@ -1,9 +1,9 @@
 
   class InformacionAduanera < WriterXML
 
-    def initialize(hash)
+    def initialize(para=nil)
       @attributes=[ "numero", "fecha", "aduana"];
-      from_hash(hash)
+      init(para)
     end
 
 

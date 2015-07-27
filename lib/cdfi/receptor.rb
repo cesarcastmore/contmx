@@ -1,7 +1,7 @@
 class Receptor < WriterXML
-  def initialize(hash)
+  def initialize(para=nil)
     @attributes = ["nombre", "rfc"]
     @sequence = ["Domicilio"]
-    from_hash(hash)
+    init(para)
   end
 end

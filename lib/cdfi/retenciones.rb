@@ -1,6 +1,6 @@
 class Retenciones < WriterXML
-  def initialize(params)
+  def initialize(para=nil)
     @sequence = ["Retencion"]
-    from_hash(params)
+    init(para)
   end
 end
