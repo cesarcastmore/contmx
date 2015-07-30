@@ -1,4 +1,6 @@
 require "nokogiri"
+require 'zip'
+
 
 module BCE
 
@@ -21,8 +23,30 @@ module BCE
     xsd.validate(doc).each do |error|
       array_errors << error.message
     end
-
   end
+
+    def BCE.to_zip(folder, balanza)
+
+      rfc = balanza["RFC"]
+      anio = balanza["anio"]
+      mes= balanza["mes"]
+      preffix="B"+ balanza["TipoEnvio"] 
+
+      name_file = rfc + anio + mes+ preffix
+      path_xml = folder + "/" + name_file+ ".xml"
+      path_zip = folder + "/" + name_file+ ".zip"
+
+      BCE.write_to_file(path_xml, balanza)
+
+      input_filenames = Array.new
+      input_filenames << name_file + ".xml"
+
+      Zip::File.open(path_zip, Zip::File::CREATE) do |zipfile|
+        input_filenames.each do |filename|
+          zipfile.add(filename, path_xml)
+        end
+      end
+end
 
 
     def BCE.validateScheme?(path)

@@ -138,9 +138,10 @@ comprobante_2 = Comprobante.new(:metodoDePago =>"ingreso",
                         :rfc => "RAI010201ASB",
                         :Domicilio => { :calle => "calle"}
                         },
-          :Conceptos => [
-                        {:Concepto => { :valorUnitario => "12.12"}},
-                        {:Concepto => {:valorUnitario => "13.12"}}])
+          :Conceptos => [ :Concepto => [{ :valorUnitario => "15"},
+				         {:valorUnitario => "15"}
+                                        ]
+                         ])
 =begin
 Si deseamos agregar el complemento es necesario separar
 del hash para crear el objeto Complemento que necesitamos y luego agregarlo al objeto comprobante.
@@ -154,3 +155,4 @@ una buena estrategia separlos del hash y añadirlos cuando estubieran timbrados.
 #comprobante_2.complemento =complemento;
 
 xml = CDFI.to_xml(comprobante_2)
+puts xml

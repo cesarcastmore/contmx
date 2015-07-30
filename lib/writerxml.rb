@@ -10,6 +10,7 @@ Metodo que inicializa la clase
 =end
 def init(para=nil)
 
+#JSON.parse(s,:symbolize_names => true)
   @attributes = Array.new if @attributes.nil?
   @sequence = Array.new if @sequence.nil?
 
@@ -120,10 +121,12 @@ Metodo para obtener los atributos del objecto
 
 def [](key)
   @attributes = Array.new if @attributes.nil?
-  if @attributes.include? key.downcase
+  attributes_downcase =@attributes.map(&:downcase)
+  key.downcase!
+  if attributes_downcase.include? key
     return get(key)
   else
-    raise 'El atributo no ha sido encontrado en el objecto'
+    raise 'El atributo no ha sido encontrado en el objecto '+ key
   end
 end
 
