@@ -1,36 +1,38 @@
 require "nokogiri"
+require "../writer.rb"
 
-module CatalogoCuentas
+class CatalogoCuentas
+  include Writer
 
-  def CatalogoCuentas.to_xml(catalogo)
-    builder = Nokogiri::XML::Builder.new do |xml|
-      catalogo.writeXML(xml)
-    end
-    return  builder.to_xml
+  def name_file(catalogo)
+    rfc = catalogo["RFC"]
+    anio = catalogo["anio"]
+    mes= catalogo["mes"]
+    preffix="CT"
+
+    name_file_xml = rfc + anio + mes+ preffix
+    return name_file_xml + ".xml"
   end
 
-  def CatalogoCuentas.write_to_file(path, catalogo)
-    xml = CatalogoCuentas.to_xml(catalogo)
-    File.write(path, xml)
+  def to_xml_file_sat(folder, catalogo)
+    xml_name=name_file(catalogo)
+    path_file_xml = folder+ "/"+ xml_name
+    write_to_file(path_file_xml, catalogo)
+    return  path_file_xml
   end
 
-  def CatalogoCuentas.validateScheme(path)
-    array_errors= Array.new
-    xsd = Nokogiri::XML::Schema(File.read("CatalogoCuentas_1_1.xsd"))
-    doc = Nokogiri::XML(File.read(path))
-    xsd.validate(doc).each do |error|
-      array_errors << error.message
-      puts error.message
-    end
-
+  def validate_scheme_sat(path_file_xml)
+    return validate_scheme(path_file_xml, "CatalogoCuentas_1_1.xsd")
   end
 
 
-    def CatalogoCuentas.validateScheme?(path)
-      array_errors = CatalogoCuentas.validateScheme(path)
-      return array_errors.empty?
+  def validate_scheme_sat?(path_file_xml)
+    array_errors = validate_scheme(path_file_xml, "CatalogoCuentas_1_1.xsd")
+    if array_errors.empty?
+      return true
+    else
+      return false
     end
-
-
+  end
 
 end

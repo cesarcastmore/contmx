@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<PLZ:Polizas xmlns:PLZ="http://www.sat.gob.mx/esquemas/ContabilidadE/1_1/PolizasPeriodo" Version="1.1" RFC="RUBY010215RAI" Mes="01" Anio="2015" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/esquemas/ContabilidadE/1_1/PolizasPeriodo http://www.sat.gob.mx/esquemas/ContabilidadE/1_1/PolizasPeriodo/PolizasPeriodo_1_1.xsd">
-  <PLZ:Poliza Concepto="concepto 1"/>
-  <PLZ:Poliza Concepto="concepto 2"/>
-  <PLZ:Poliza Concepto="concepto 3"/>
-</PLZ:Polizas>

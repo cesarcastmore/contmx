@@ -12,4 +12,10 @@ polizas = Polizas.new(:RFC => "RUBY010215RAI", :version =>"1.1", :mes=>"01", :an
 
 polizas.inspect
 
-PLZ.write_to_file("polizas.xml", polizas)
+
+writer=PLZ.new
+path_xml = writer.to_xml_file_sat("/home/ccastillo/Desktop", polizas)
+
+array_errors = writer.validate_scheme_sat(path_xml)
+puts array_errors
+writer.to_zip(path_xml)

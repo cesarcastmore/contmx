@@ -1,56 +1,38 @@
 require "nokogiri"
 require 'zip'
+require "../writer.rb"
 
+class BCE
+  include Writer
 
-module BCE
+  def name_file(balanza)
+    rfc = balanza["RFC"]
+    anio = balanza["anio"]
+    mes= balanza["mes"]
+    preffix="B"+ balanza["TipoEnvio"]
 
-  def BCE.to_xml(balanza)
-    builder = Nokogiri::XML::Builder.new do |xml|
-      balanza.writeXML(xml)
-    end
-    return  builder.to_xml
+    name_file_xml = rfc + anio + mes+ preffix
+    return name_file_xml + ".xml"
   end
 
-  def BCE.write_to_file(path, balanza)
-    xml = BCE.to_xml(balanza)
-    File.write(path, xml)
+  def to_xml_file_sat(folder, balanza)
+    xml_name=name_file(balanza)
+    path_file_xml = folder+ "/"+ xml_name
+    write_to_file(path_file_xml, balanza)
+    return  path_file_xml
   end
 
-  def BCE.validateScheme(path)
-    array_errors= Array.new
-    xsd = Nokogiri::XML::Schema(File.read("BalanzaComprobacion_1_1.xsd"))
-    doc = Nokogiri::XML(File.read(path))
-    xsd.validate(doc).each do |error|
-      array_errors << error.message
-    end
+  def validate_scheme_sat(path_file_xml)
+    return validate_scheme(path_file_xml, "BalanzaComprobacion_1_1.xsd")
   end
 
-    def BCE.to_zip(folder, balanza)
 
-      rfc = balanza["RFC"]
-      anio = balanza["anio"]
-      mes= balanza["mes"]
-      preffix="B"+ balanza["TipoEnvio"] 
-
-      name_file = rfc + anio + mes+ preffix
-      path_xml = folder + "/" + name_file+ ".xml"
-      path_zip = folder + "/" + name_file+ ".zip"
-
-      BCE.write_to_file(path_xml, balanza)
-
-      input_filenames = Array.new
-      input_filenames << name_file + ".xml"
-
-      Zip::File.open(path_zip, Zip::File::CREATE) do |zipfile|
-        input_filenames.each do |filename|
-          zipfile.add(filename, path_xml)
-        end
-      end
-end
-
-
-    def BCE.validateScheme?(path)
-      array_errors = BCE.validateScheme(path)
-      return array_errors.empty?
+  def validate_scheme_sat?(path_file_xml)
+    array_errors = validate_scheme(path_file_xml, "BalanzaComprobacion_1_1.xsd")
+    if array_errors.empty?
+      return true
+    else
+      return false
     end
+  end
 end

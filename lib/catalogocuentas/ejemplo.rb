@@ -23,7 +23,7 @@ cuenta_3 = Ctas.new
 cuenta_3["desc"] = "cuenta 3"
 cuenta_3["subCtaDe"] = "1.01"
 cuenta_3["nivel"] = "2"
-cuenta_3["codAgrup"] = "604.30"
+cuenta_3["codAgrup"] = "60"
 cuenta_3["natur"] = "D"
 cuenta_3["numCta"] = "100003"
 
@@ -32,7 +32,9 @@ cuentas << cuenta_3
 
 catalogo.set(:ctas, cuentas)
 
+writer=CatalogoCuentas.new
+path_xml = writer.to_xml_file_sat("/home/ccastillo/Desktop", catalogo)
 
-
-CatalogoCuentas.write_to_file("catalogocuenta.xml", catalogo)
-CatalogoCuentas.validateScheme("catalogocuenta.xml")
+array_errors = writer.validate_scheme_sat(path_xml)
+puts array_errors
+writer.to_zip(path_xml)

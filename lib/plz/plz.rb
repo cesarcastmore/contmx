@@ -1,31 +1,40 @@
 require "nokogiri"
-module PLZ
+require "../writer.rb"
 
-def PLZ.to_xml(polizas)
-  builder = Nokogiri::XML::Builder.new do |xml|
-    polizas.writeXML(xml)
-  end
-  return  builder.to_xml
-end
 
-def PLZ.write_to_file(path, polizas)
-  xml = PLZ.to_xml(polizas)
-  File.write(path, xml)
-end
+class PLZ
+  include Writer
 
-def PLZ.validateScheme(path)
-  array_errors= Array.new
-  xsd = Nokogiri::XML::Schema(File.read("PolizasPeriodo_1_1.xsd"))
-  doc = Nokogiri::XML(File.read(path))
-  xsd.validate(doc).each do |error|
-    array_errors << error.message
+  def name_file(polizas)
+    rfc = polizas["RFC"]
+    anio = polizas["anio"]
+    mes= polizas["mes"]
+    preffix="PL"
+
+    name_file_xml = rfc + anio + mes+ preffix
+    return name_file_xml + ".xml"
   end
 
-end
-
-
-  def PLZ.validateScheme?(path)
-    array_errors = PLZ.validateScheme(path)
-    return array_errors.empty?
+  def to_xml_file_sat(folder, polizas)
+    xml_name=name_file(polizas)
+    path_file_xml = folder+ "/"+ xml_name
+    write_to_file(path_file_xml, polizas)
+    return  path_file_xml
   end
+
+  def validate_scheme_sat(path_file_xml)
+    return validate_scheme(path_file_xml, "PolizasPeriodo_1_1.xsd")
+  end
+
+
+  def validate_scheme_sat?(path_file_xml)
+    array_errors = validate_scheme(path_file_xml, "PolizasPeriodo_1_1.xsd")
+    if array_errors.empty?
+      return true
+    else
+      return false
+    end
+  end
+
+
 end

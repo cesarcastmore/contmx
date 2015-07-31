@@ -19,6 +19,9 @@ balanza.set(:ctas, cuentas)
 #balanza.sellar("/home/ccastillo/Desktop/CSD01_AAA010101AAA.cer",
 #               "/home/ccastillo/Desktop/CSD01_AAA010101AAA.key", "12345678a")
 
-BCE.to_zip("/home/ccastillo/Desktop", balanza)
-BCE.write_to_file("balanza.xml", balanza)
-BCE.validateScheme("balanza.xml")
+writer=BCE.new
+path_xml = writer.to_xml_file_sat("/home/ccastillo/Desktop", balanza)
+
+array_errors = writer.validate_scheme_sat(path_xml)
+puts array_errors
+writer.to_zip(path_xml)
