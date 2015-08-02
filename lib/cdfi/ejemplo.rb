@@ -122,7 +122,6 @@ comprobante_1.sellar("emisor.cer", "emisor.key", "12345678a")
 
 # El CDFI es una especie de lector, escritura y transformaciones.
 xml = CDFI.to_xml(comprobante_1);
-puts xml
 CDFI.write_to_file("comprobante.xml", comprobante_1);
 CDFI.validateScheme("comprobante.xml")
 

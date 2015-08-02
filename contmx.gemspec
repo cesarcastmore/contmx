@@ -10,5 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    =
     'https://github.com/cesarcastmore/contmx'
   s.license       = 'MIT'
-  s.add_development_dependency 'nokogiri', '>= 1.6.6.2', 'rubyzip' , '>= 1.1.4'
+  s.add_development_dependency 'nokogiri', '>= 1.6.6.2'
+  s.add_development_dependency 'rubyzip' , '>= 1.1.4'
+
 end

@@ -20,6 +20,3 @@ cuenta_1.update(:DetalleAux=>[{:Fecha=>"01/01/2014", :concepto=>"concepto1" },
                             {:Fecha=>"01/02/2014", :concepto=>"concepto2"}])
 
 auxiliarctas.cuenta= cuenta_1
-
-xml=AuxCtas.to_xml(auxiliarctas)
-puts xml

@@ -1,31 +1,38 @@
 require "nokogiri"
+require 'zip'
+require "../writer.rb"
 
-module  AuxCtas
-  def AuxCtas.to_xml(auxiliarctas)
-  builder = Nokogiri::XML::Builder.new do |xml|
-    auxiliarctas.writeXML(xml)
-  end
-  return  builder.to_xml
-end
+class  AuxCtas
+  include Writer
 
-def AuxCtas.write_to_file(path, auxiliarctas)
-  xml = AuxCtas.to_xml(auxiliarctas)
-  File.write(path, xml)
-end
+  def name_file(auxiliarctas)
+    rfc = auxiliarctas["RFC"]
+    anio = auxiliarctas["anio"]
+    mes= auxiliarctas["mes"]
+    preffix="XC"
 
-def AuxCtas.validateScheme(path)
-  array_errors= Array.new
-  xsd = Nokogiri::XML::Schema(File.read("AuxiliarCtas_1_1.xsd"))
-  doc = Nokogiri::XML(File.read(path))
-  xsd.validate(doc).each do |error|
-    array_errors << error.message
+    name_file_xml = rfc + anio + mes+ preffix
+    return name_file_xml + ".xml"
   end
 
-end
+  def to_xml_file_sat(folder, auxiliarctas)
+    xml_name=name_file(auxiliarctas)
+    path_file_xml = folder+ "/"+ xml_name
+    write_to_file(path_file_xml, auxiliarctas)
+    return  path_file_xml
+  end
+
+  def validate_scheme_sat(path_file_xml)
+    return validate_scheme(path_file_xml, "AuxiliarCtas_1_1.xsd")
+  end
 
 
-  def AuxCtas.validateScheme?(path)
-    array_errors = AuxCtas.validateScheme(path)
-    return array_errors.empty?
+  def validate_scheme_sat?(path_file_xml)
+    array_errors = validate_scheme(path_file_xml, "AuxiliarCtas_1_1.xsd")
+    if array_errors.empty?
+      return true
+    else
+      return false
+    end
   end
 end

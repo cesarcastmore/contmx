@@ -231,7 +231,6 @@ seran utilizado para el metodo writeXML
 =end
 
   def sequence_to_array_objects
-    @attributes = Array.new if @attributes.nil?
     @sequence = Array.new if @sequence.nil?
 
     array = []
@@ -241,7 +240,7 @@ seran utilizado para el metodo writeXML
         if instance_attribute_defined?(downcaseElement)
           object = get(downcaseElement)
           if object.kind_of?(Array)
-            return object
+            array.concat object
           else
             array << object
           end
