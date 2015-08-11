@@ -11,7 +11,7 @@ module Contmx
 
     def write_to_file(path_file, object)
       xml = to_xml(object)
-      File.write(path_file, xml)
+      File.open(path_file, "w") {|file| file.write(xml)}
     end
 
     def validate_scheme(path_file, path_scheme)

@@ -9,8 +9,6 @@ class WriterXML
 Metodo que inicializa la clase
 =end
 def init(para=nil)
-
-#JSON.parse(s,:symbolize_names => true)
   @attributes = Array.new if @attributes.nil?
   @sequence = Array.new if @sequence.nil?
 
@@ -166,13 +164,13 @@ en las variables de instancia
 
   def writeXML(xml)
     if @targetNamespace.nil?
-      xml.send(self.class.to_s){
+      xml.send(self.class.to_s.split("::").last){
         write_attributes_elements(xml)
       }
     else
       prefix = "#{@targetNamespace[:prefix]}"
       namespace = "#{@targetNamespace[:namespace]}"
-      xml.send(self.class.to_s){
+      xml.send(self.class.to_s.split("::").last){
         ins = xml.parent.add_namespace_definition(prefix, namespace)
         xml.parent.namespace = ins
         write_attributes_elements(xml)
