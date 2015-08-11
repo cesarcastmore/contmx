@@ -171,8 +171,11 @@ en las variables de instancia
       prefix = "#{@targetNamespace[:prefix]}"
       namespace = "#{@targetNamespace[:namespace]}"
       xml.send(self.class.to_s.split("::").last){
+=begin
         ins = xml.parent.add_namespace_definition(prefix, namespace)
         xml.parent.namespace = ins
+=end
+
         write_attributes_elements(xml)
       }
     end

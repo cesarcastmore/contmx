@@ -25,13 +25,13 @@ module Contmx
 
     def validate_scheme_sat(path_file_xml)
       return validate_scheme(path_file_xml, 
-        "/home/hyde/code/contmx/lib/contmx/bce/AuxiliarFolios_1_2.xsd")
+        File.dirname(__FILE__)+"/BalanzaComprobacion_1_1.xsd")
     end
 
 
     def validate_scheme_sat?(path_file_xml)
       array_errors = validate_scheme(path_file_xml, 
-        "/home/hyde/code/contmx/lib/contmx/bce/AuxiliarFolios_1_2.xsd")
+        File.dirname(__FILE__)+"/AuxiliarFolios_1_2.xsd")
       if array_errors.empty?
         return true
       else
