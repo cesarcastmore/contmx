@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "Contabilidad en medios electronicos"
   s.authors     = ["Cesar Castillo Moreno"]
   s.email       = 'cesar.cast.more@gmail.com'
-  s.files = Dir['lib/*.rb']
+  s.files    = `git ls-files`.split($/)
   s.homepage    =
     'https://github.com/cesarcastmore/contmx'
   s.license       = 'MIT'

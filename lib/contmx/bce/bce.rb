@@ -1,16 +1,14 @@
 require "nokogiri"
-require 'zip'
-require "writer"
+require "zip"
 
 module Contmx
   class BCE
     include Writer
-
     def name_file(repauxfol)
       rfc = repauxfol["RFC"]
       anio = repauxfol["anio"]
       mes= repauxfol["mes"]
-      preffix="XF"
+      preffix = "BCE"
 
       name_file_xml = rfc + anio + mes+ preffix
       return name_file_xml + ".xml"
@@ -27,7 +25,6 @@ module Contmx
       return validate_scheme(path_file_xml, 
         File.dirname(__FILE__)+"/BalanzaComprobacion_1_1.xsd")
     end
-
 
     def validate_scheme_sat?(path_file_xml)
       array_errors = validate_scheme(path_file_xml, 
