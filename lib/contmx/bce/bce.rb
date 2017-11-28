@@ -8,8 +8,9 @@ module Contmx
       rfc = repauxfol["RFC"]
       anio = repauxfol["anio"]
       mes= repauxfol["mes"]
-      preffix = "BCE"
-
+      tipo_envio = repauxfol["TipoEnvio"]
+      preffix = tipo_envio == 'N' ? "BN" : "BC"
+      
       name_file_xml = rfc + anio + mes+ preffix
       return name_file_xml + ".xml"
     end
